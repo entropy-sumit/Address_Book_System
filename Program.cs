@@ -8,7 +8,8 @@ namespace AddressBookSystem
         {
             Console.WriteLine("Wecome to Address Book Program.\n");
 
-            // UC1
+            //uc2
+            AddressBook.AddContact();
             AddressBook.Display();
         }
     }
