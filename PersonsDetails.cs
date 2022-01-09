@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Address_Book_System
+namespace AddressBookSystem
 {
     class PersonsDetails
     {

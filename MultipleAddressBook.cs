@@ -19,7 +19,7 @@ namespace AddressBookSystem
             PersonsDetails person = new PersonsDetails();
 
             Console.Write(" Enter your First name : ");
-            person.Firstname = Console.ReadLine();
+            person.FirstName = Console.ReadLine();
             Console.Write(" Enter your Last name : ");
             person.LastName = Console.ReadLine();
             Console.Write(" Enter your Address : ");
@@ -36,7 +36,7 @@ namespace AddressBookSystem
             person.Email = Console.ReadLine();
 
             contacts.Add(person);
-            Console.WriteLine("\n {0}'s contact succesfully added", person.Firstname);
+            Console.WriteLine("\n {0}'s contact succesfully added", person.FirstName);
         }
 
         public static void Details()
@@ -51,7 +51,7 @@ namespace AddressBookSystem
 
                 foreach (var Detailing in contacts)
                 {
-                    Console.WriteLine("First name : " + Detailing.Firstname);
+                    Console.WriteLine("First name : " + Detailing.FirstName);
                     Console.WriteLine("Last name : " + Detailing.LastName);
                     Console.WriteLine("Address : " + Detailing.Address);
                     Console.WriteLine("State : " + Detailing.State);
