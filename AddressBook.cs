@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Address_Book_System
+namespace AddressBookSystem
 {
     class AddressBook
     {
@@ -62,22 +62,43 @@ namespace Address_Book_System
             }
         }
 
-        public static int SearchDuplicate(List<PersonsDetails> contacts, PersonsDetails contactBook)
+        public static void SearchCity()
         {
+            Console.WriteLine("Please Enter Name of city");
+            string city = Console.ReadLine();
             foreach (var Details in contacts)
             {
-                var person = contacts.Find(p => p.FirstName.Equals(contactBook.FirstName));
+                var person = contacts.Find(p => p.City.Equals(city));
                 if (person != null)
                 {
-                    Console.WriteLine("Already this contact exist with same First name : " + person.FirstName);
-                    return 1;
+                    Console.WriteLine("{0} person in the {1}", Details.FirstName, city);
                 }
                 else
                 {
-                    return 0;
+
                 }
             }
-            return 0;
+
+        }
+
+        //This method for search person using state name
+        public static void SearchState()
+        {
+            Console.WriteLine("Please Enter Name of State");
+            string state = Console.ReadLine();
+            foreach (var Details in contacts)
+            {
+                var person = contacts.FindAll(p => p.State.Equals(state));
+                if (person != null)
+                {
+                    Console.WriteLine("{0} person in the {1}", Details.FirstName, state);
+                }
+                else
+                {
+
+                }
+            }
+
         }
     }
 }
