@@ -6,7 +6,10 @@ namespace AddressBookSystem
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Wecome to Address Book Program.\n");
+
+            // UC1
+            AddressBook.Display();
         }
     }
 }
