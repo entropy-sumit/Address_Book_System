@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+
 
 namespace AddressBookSystem
 {
@@ -10,8 +12,8 @@ namespace AddressBookSystem
 
         private static Dictionary<string, List<PersonsDetails>> addressBook = new Dictionary<string, List<PersonsDetails>>();
 
-        public IEnumerable<KeyValuePair<string, List<PersonsDetails>>> State { get; private set; }
-        public IEnumerable<KeyValuePair<string, List<PersonsDetails>>> City { get; private set; }
+        public static Dictionary<string, List<PersonsDetails>> cityBook = new Dictionary<string, List<PersonsDetails>>();
+        public static Dictionary<string, List<PersonsDetails>> stateBook = new Dictionary<string, List<PersonsDetails>>();
 
         public static void AddTo(string name)
         {
@@ -65,78 +67,132 @@ namespace AddressBookSystem
             }
         }
 
-        public static void ViewByCityOrStateName()
+        public static void SearchCity()
         {
-            Console.WriteLine("Please select your option: \n 1 :  To view all contacts by city, \n 2 : To view all contacts by state.");
-            int choice = Convert.ToInt32(Console.ReadLine());
-
-            if (choice == 1)
+            Console.WriteLine("Please Enter Name of city");
+            string city = Console.ReadLine();
+            foreach (var Details in contacts)
             {
-                int cityCount = AddressBook.Count();
-                if (cityCount != 0)
+                var person = contacts.Find(p => p.City.Equals(city));
+                if (person != null)
                 {
-                    foreach (KeyValuePair<string, List<PersonsDetails>> item in City)
-                    {
-                        Console.WriteLine("\n Following are the Person details residing in the city -" + item.Key);
-                        foreach (var items in item.Value)
-                        {
-                            //Printing added details
-                            Console.WriteLine("First Name : " + items.FirstName);
-                            Console.WriteLine("Last Name : " + items.LastName);
-                            Console.WriteLine("Address : " + items.Address);
-                            Console.WriteLine("Phone Number : " + items.PhoneNumber);
-                            Console.WriteLine("Email ID : " + items.Email);
-                            Console.WriteLine("City : " + items.City);
-                            Console.WriteLine("State : " + items.State);
-                            Console.WriteLine("ZIP code : " + items.ZipCode);
-                        }
-
-                    }
+                    Console.WriteLine("{0} person in the {1}", Details.FirstName, city);
                 }
                 else
                 {
-                    Console.WriteLine("\nCurrently no entries are inserted.");
+
                 }
             }
-            else if (choice == 2)
+
+        }
+
+        //This method for search person using state name
+        public static void SearchState()
+        {
+            Console.WriteLine("Please Enter Name of State");
+            string state = Console.ReadLine();
+            foreach (var Details in contacts)
             {
-
-                int stateCount = AddressBook.Count();
-                if (stateCount != 0)
+                var person = contacts.Find(p => p.State.Equals(state));
+                if (person != null)
                 {
-                    foreach (KeyValuePair<string, List<PersonsDetails>> item in State)
-                    {
-                        Console.WriteLine("\n Following are the Person details residing in the state -" + item.Key);
-                        foreach (var items in item.Value)
-                        {
-                            //Printing added details
-                            Console.WriteLine("First Name : " + items.FirstName);
-                            Console.WriteLine("Last Name : " + items.LastName);
-                            Console.WriteLine("Address : " + items.Address);
-                            Console.WriteLine("Phone Number : " + items.PhoneNumber);
-                            Console.WriteLine("Email ID : " + items.Email);
-                            Console.WriteLine("City : " + items.City);
-                            Console.WriteLine("State : " + items.State);
-                            Console.WriteLine("ZIP code : " + items.ZipCode);
-                        }
-
-                    }
+                    Console.WriteLine("{0} person in the {1}", Details.FirstName, state);
                 }
                 else
                 {
-                    Console.WriteLine("\nCurrently no entries are inserted.");
-                }
 
+                }
             }
-            else
+
+        }
+        //This method for add person details by using city name
+        public void AddByCity()
+        {
+            foreach (var Detail in contacts)
             {
-                Console.WriteLine("\nWrong entry, Please choose between 1 and 2");
+                string city = Detail.City;
+                if (cityBook.ContainsKey(city))
+                {
+                    List<PersonsDetails> exist = cityBook[city];
+                    exist.Add(Detail);
+                }
+                else
+                {
+                    List<PersonsDetails> cityContact = new List<PersonsDetails>();
+                    cityContact.Add(Detail);
+                    cityBook.Add(city, cityContact);
+                }
+            }
+        }
+        //This method for add person details by using  state name
+        public void AddByState()
+        {
+            foreach (var Detail in contacts)
+            {
+                string state = Detail.State;
+                if (stateBook.ContainsKey(state))
+                {
+                    List<PersonsDetails> exists = stateBook[state];
+                    exists.Add(Detail);
+
+                }
+                else
+                {
+                    List<PersonsDetails> stateContact = new List<PersonsDetails>();
+                    stateContact.Add(Detail);
+                    stateBook.Add(state, stateContact);
+                }
             }
         }
 
-        private static int Count()
+        public static void CountByCityOrStateName()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Select 1 : count person by city, \n2: Count person by state");
+            int num = Convert.ToInt32(Console.ReadLine());
+            void CountByCity()
+            {
+                foreach (var item in cityBook)
+                {
+                    int count = item.Value.Count();
+                    Console.WriteLine("There are {0} number of people in City- {1}", count, item.Key);
+                }
+            }
+            void CountBystate()
+            {
+                foreach (var item in stateBook)
+                {
+                    int count = item.Value.Count();
+                    Console.WriteLine("There are {0} number of people in City- {1}", count, item.Key);
+                }
+            }
+
+            if (num == 1)
+            {
+                //When there are atleast 1 entry
+                if (cityBook.Count != 0)
+                {
+                    CountByCity();
+                }
+                else
+                {
+                    Console.WriteLine("Currently no entries stored");
+                }
+            }
+            else if (num == 2)
+            {
+                if (stateBook.Count != 0)
+                {
+                    CountBystate();
+                }
+                else
+                {
+                    Console.WriteLine("Currently no entries stored");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid selection, please select between 1 and 2");
+            }
         }
     }
 }
