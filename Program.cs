@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 
-namespace AddressBookSystem
+namespace Address_Book_System
 {
     class Program
     {
         static void Main(string[] args)
         {
-            // UC6
+            Console.WriteLine("*********** Address Book Program ************\n");
+
             Console.Write("Enter Number of Address Book you want : ");
             int numBook = Convert.ToInt32(Console.ReadLine());
             int numberBook = 0;
@@ -16,9 +18,11 @@ namespace AddressBookSystem
                 Console.Write("\n Enter name of Address Book : ");
                 string book = Console.ReadLine();
                 Console.WriteLine("\n Select the below option");
-                Console.WriteLine("1.Add Contact Details \n2.View Contact Details \n3.Edit Contact Details \n4.Delete Contact Details");
+                Console.WriteLine("\n1.Add Contact Details \n2.View Contant Details \n3.Search Duplicate ");
                 Console.Write("Enter Your Choice : ");
                 int num = Convert.ToInt32(Console.ReadLine());
+
+
 
                 while (key != 0)
                 {
@@ -26,31 +30,25 @@ namespace AddressBookSystem
                     {
 
                         case 1:
-                            MultipleAddressBook.AddContact();
+                            AddressBook.AddContact();
                             break;
                         case 2:
-                            MultipleAddressBook.Details();
+                            AddressBook.Details();
+                            break;
+                        case 3:
+                            AddressBook.SearchDuplicate();
                             break;
                         default:
                             Console.Write("Choice correct option : ");
                             num = Convert.ToInt32(Console.ReadLine());
                             break;
                     }
-                    Console.Write("\n Do you wish to continue, press 1 or If you don't want then press any key : ");
+                    Console.Write("\n Do you wish to continue press 1 : ");
                     key = Convert.ToInt32(Console.ReadLine());
-                    if (key == 1)
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        break;
-                    }
                 }
-                MultipleAddressBook.AddTo(book);
+                AddressBook.AddTo(book);
                 numberBook++;
             }
         }
     }
 }
-
