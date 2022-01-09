@@ -8,10 +8,9 @@ namespace AddressBookSystem
         {
             Console.WriteLine("Wecome to Address Book Program.\n");
 
-            // UC4
+
+            // UC5
             AddressBook.AddContact();
-            AddressBook.Display();
-            AddressBook.Delete();
             AddressBook.Display();
         }
     }
