@@ -10,15 +10,15 @@ namespace AddressBookSystem
 
         public static void AddContact()
         {
-            Console.WriteLine(" You have to enter your details here. \n");
-            int contactsNum = 1;
+            Console.Write("How many contacts do you want to add ? : ");
+            int contactsNum = Convert.ToInt32(Console.ReadLine());
             while (contactsNum > 0)
             {
                 PersonsDetails person = new PersonsDetails();
 
-                Console.Write(" Enter your First name : ");
+                Console.Write(" Enter your First Name : ");
                 person.Firstname = Console.ReadLine();
-                Console.Write(" Enter your Last name : ");
+                Console.Write(" Enter your Last Name : ");
                 person.LastName = Console.ReadLine();
                 Console.Write(" Enter your Address : ");
                 person.Address = Console.ReadLine();
